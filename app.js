@@ -2,7 +2,7 @@
 // 1. DATABASE INITIALIZATION (Dexie.js)
 // ==========================================================================
 const db = new Dexie("VisitCompanionDB");
-
+//Test
 db.version(1).stores({
   visits: "++id, name, notes, date, lat, lng"
 });
