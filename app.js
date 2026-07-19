@@ -46,7 +46,7 @@ gpsBtn.addEventListener("click", () => {
       currentLat = position.coords.latitude;
       currentLng = position.coords.longitude;
 
-      gpsDisplay.textContent = `📍 Captured: ${currentLat.toFixed(5)}, ${currentLng.toFixed(5)}`;
+      gpsDisplay.textContent = `📍 Captured: ${currentLat.toFixed(5)},${currentLng.toFixed(5)}`;
       gpsDisplay.style.borderLeftColor = "#2563eb";
       gpsBtn.disabled = false;
     },
@@ -109,7 +109,22 @@ visitForm.addEventListener("submit", async (event) => {
 });
 
 // ==========================================================================
-// STEP 4: DISPLAYING REAL DATA & GOOGLE MAPS NAVIGATION Links
+// 5. DATABASE DELETION FEATURE
+// ==========================================================================
+async function deleteVisit(id) {
+  if (confirm("Are you sure you want to remove this visit record?")) {
+    try {
+      await db.visits.delete(id);
+      await renderVisitsLog(); // Refresh list immediately
+    } catch (error) {
+      console.error("Error deleting record:", error);
+      alert("Could not remove the record.");
+    }
+  }
+}
+
+// ==========================================================================
+// 6. DISPLAYING REAL DATA & GOOGLE MAPS NAVIGATION LINKS
 // ==========================================================================
 
 // 1. Grab the container where the log cards should be displayed
@@ -132,13 +147,11 @@ async function renderVisitsLog() {
 
   // 3. Loop through every record in our database and generate a card for it
   allVisits.forEach((visit) => {
-    // Build a native Google Maps link using the latitude and longitude we saved
-    // If GPS wasn't clicked, we point to a general search layout
-    // geo:lat,lng opens the native maps app directly on Android
-    // REPLACE your mapsUrl line inside renderVisitsLog() with this:
-    // it is working let mapsUrl = `google.navigation:q=${visit.lat},${visit.lng}`;
-    let mapsUrl = `https://maps.google.com/?q=${visit.lat},${visit.lng}`;
+    // Using the true offline Android intent layout that worked for you in Chrome
+    let mapsUrl = `google.navigation:q=${visit.lat},${visit.lng}`;
+
     // Format the card layout dynamically using the record values
+    // Added a native onclick handler pointing to deleteVisit() and passing its primary key id
     const cardHTML = `
             <div class="visit-card">
                 <div class="card-header">
@@ -146,11 +159,14 @@ async function renderVisitsLog() {
                     <span class="card-date">${visit.date}</span>
                 </div>
                 <p class="card-notes">${visit.notes}</p>
-                <div class="card-footer">
+                <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; wrap: wrap; gap: 10px;">
                     <span class="card-coordinates">
                         ${visit.lat ? `📍 Coordinates Saved` : `❌ No Location Pin`}
                     </span>
-                    ${visit.lat ? `<a href="${mapsUrl}" target="_blank" class="btn-nav">Navigate Back (Google Maps)</a>` : ""}
+                    <div class="card-actions" style="display: flex; gap: 8px;">
+                        ${visit.lat ? `<a href="${mapsUrl}" class="btn-nav">Navigate</a>` : ""}
+                        <button onclick="deleteVisit(${visit.id})" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">Remove</button>
+                    </div>
                 </div>
             </div>
         `;
