@@ -136,7 +136,8 @@ async function renderVisitsLog() {
     // If GPS wasn't clicked, we point to a general search layout
     // geo:lat,lng opens the native maps app directly on Android
     // REPLACE your mapsUrl line inside renderVisitsLog() with this:
-    let mapsUrl = `google.navigation:q=${visit.lat},${visit.lng}`;
+    // it is working let mapsUrl = `google.navigation:q=${visit.lat},${visit.lng}`;
+    let mapsUrl = `https://maps.google.com/?q=${visit.lat},${visit.lng}`;
     // Format the card layout dynamically using the record values
     const cardHTML = `
             <div class="visit-card">
