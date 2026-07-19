@@ -221,3 +221,47 @@ input[type="date"]:focus {
 .btn-nav:active {
   background-color: #dc2626;
 }
+
+/* ==========================================================================
+   UPDATED CARD FOOTER LAYOUT
+   ========================================================================== */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-nav,
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  height: 36px;
+  box-sizing: border-box;
+  border: none;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.btn-delete:hover,
+.btn-delete:active {
+  background-color: #bb2d3b;
+}

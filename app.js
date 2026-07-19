@@ -150,8 +150,7 @@ async function renderVisitsLog() {
     // Using the true offline Android intent layout that worked for you in Chrome
     let mapsUrl = `google.navigation:q=${visit.lat},${visit.lng}`;
 
-    // Format the card layout dynamically using the record values
-    // Added a native onclick handler pointing to deleteVisit() and passing its primary key id
+    // Format the card layout dynamically using clean class names
     const cardHTML = `
             <div class="visit-card">
                 <div class="card-header">
@@ -159,13 +158,13 @@ async function renderVisitsLog() {
                     <span class="card-date">${visit.date}</span>
                 </div>
                 <p class="card-notes">${visit.notes}</p>
-                <div class="card-footer" style="display: flex; justify-content: space-between; align-items: center; wrap: wrap; gap: 10px;">
+                <div class="card-footer">
                     <span class="card-coordinates">
                         ${visit.lat ? `📍 Coordinates Saved` : `❌ No Location Pin`}
                     </span>
-                    <div class="card-actions" style="display: flex; gap: 8px;">
+                    <div class="card-actions">
                         ${visit.lat ? `<a href="${mapsUrl}" class="btn-nav">Navigate</a>` : ""}
-                        <button onclick="deleteVisit(${visit.id})" style="background-color: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold;">Remove</button>
+                        <button onclick="deleteVisit(${visit.id})" class="btn-delete">Remove</button>
                     </div>
                 </div>
             </div>
