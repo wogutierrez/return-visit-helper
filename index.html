@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Return Visit Companion</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <!-- Header Banner -->
+    <header>
+      <h1>Visit Companion</h1>
+    </header>
+
+    <main>
+      <!-- Form Section: Logging a new visit -->
+      <section class="form-section">
+        <h2>Record New Visit</h2>
+        <form id="visit-form">
+          <!-- GPS Action Group -->
+          <div class="form-group">
+            <button type="button" id="gps-btn" class="btn btn-gps">
+              📍 Capture Current Location
+            </button>
+            <div id="gps-display" class="gps-status">
+              Location: Not captured yet
+            </div>
+          </div>
+
+          <!-- Name / Landmark Input -->
+          <div class="form-group">
+            <label for="person-name">Person's Name / Description</label>
+            <input
+              type="text"
+              id="person-name"
+              placeholder="e.g., John Doe or House with blue gate"
+              required
+            />
+          </div>
+
+          <!-- Field Notes Input -->
+          <div class="form-group">
+            <label for="visit-notes">Conversation Notes</label>
+            <textarea
+              id="visit-notes"
+              rows="4"
+              placeholder="What did you discuss? What literature was placed?"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Date Selection -->
+          <div class="form-group">
+            <label for="return-date">Return Date Goal</label>
+            <input type="date" id="return-date" />
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-save">
+            💾 Save Visit Details
+          </button>
+        </form>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- Log Section: Reviewing past visits -->
+      <section class="log-section">
+        <h2>Your Return Visits</h2>
+        <div id="visits-log" class="visits-container">
+          <!-- This is a static mockup card. We will generate these dynamically with JS later! -->
+          <div class="visit-card">
+            <div class="card-header">
+              <h3>John Doe</h3>
+              <span class="card-date">July 19, 2026</span>
+            </div>
+            <p class="card-notes">
+              Placed the brochure. Loves talking about prophecy. Said to come
+              back next week Sunday.
+            </p>
+            <div class="card-footer">
+              <span class="card-coordinates">📍 Locked Pin</span>
+              <a href="#" class="btn-nav">Navigate Back (Google Maps)</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
