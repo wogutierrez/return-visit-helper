@@ -135,7 +135,8 @@ async function renderVisitsLog() {
     // Build a native Google Maps link using the latitude and longitude we saved
     // If GPS wasn't clicked, we point to a general search layout
     // geo:lat,lng opens the native maps app directly on Android
-    let mapsUrl = `geo:${visit.lat},${visit.lng}?q=${visit.lat},${visit.lng}(${encodeURIComponent(visit.name)})`;
+    // REPLACE your mapsUrl line inside renderVisitsLog() with this:
+    let mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${visit.lat},${visit.lng}&travelmode=driving`;
 
     // Format the card layout dynamically using the record values
     const cardHTML = `
